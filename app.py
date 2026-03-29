@@ -7,11 +7,11 @@ from auth import auth_bp
 def create_app(config_class=Config):
     app=Flask(__name__)
     app.config.from_object(config_class)
-    app.register_blueprint(auth_bp,url_prefix='//api/auth')
+    app.register_blueprint(auth_bp,url_prefix='/api/auth')
     app.register_blueprint(routes_bp)
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     with app.app_context():
         db.create_all()
